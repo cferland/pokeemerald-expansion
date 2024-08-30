@@ -22,6 +22,7 @@
 #include "constants/item.h"
 #include "constants/items.h"
 #include "constants/layouts.h"
+#include "constants/map_types.h"
 #include "constants/weather.h"
 
 extern const u8 EventScript_SprayWoreOff[];
@@ -367,6 +368,11 @@ static u16 GetCurrentMapWildMonHeaderId(void)
         if (gWildMonHeaders[i].mapGroup == gSaveBlock1Ptr->location.mapGroup &&
             gWildMonHeaders[i].mapNum == gSaveBlock1Ptr->location.mapNum)
         {
+            if (GetCurrentMapType() == MAP_TYPE_ROUTE)
+            {
+                i += VarGet(VAR_DAYNIGHT);
+            }
+            
             if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ALTERING_CAVE) &&
                 gSaveBlock1Ptr->location.mapNum == MAP_NUM(ALTERING_CAVE))
             {
